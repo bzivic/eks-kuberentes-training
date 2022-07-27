@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  labels:
+    app: kuard
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kuard
+  template:
+    metadata:
+      labels:
+        app: kuard
+    spec:
+      containers:
+      - name: kuard
+        image: gcr.io/kuar-demo/kuard-amd64:blue
+        ports:
+        - containerPort: 8080 #which port is exposed OUTSIDE the container
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 50m
+          requests:
+            memory: 100Mi
+            cpu: 25m

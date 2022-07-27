@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: staticclaim
+spec:
+  accessModes:
+    - ReadWriteOnce # Volume can be mounted as read-write by a single node
+  resources:
+    requests:
+      storage: 50Mi
+  storageClassName: ""

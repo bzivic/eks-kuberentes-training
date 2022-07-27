@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+  namespace: default
+spec:
+  containers:
+  - image: gcr.io/kuar-demo/kuard-amd64:bluez
+    imagePullPolicy: IfNotPresent
+    name: kuard
+    resources: {}
+  restartPolicy: Never
+  serviceAccount: default

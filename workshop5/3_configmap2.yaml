@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-cm2
+data:
+  config.json: |
+    {
+        "LANGUAGE": "Spanish",
+        "COUNTRY": "Australia"
+    }

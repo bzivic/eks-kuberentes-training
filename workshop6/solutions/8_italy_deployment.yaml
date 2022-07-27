@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: italy
+  namespace: default
+  labels:
+    app: italy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: italy
+  template:
+    metadata:
+      labels:
+        app: italy
+    spec:
+      containers:
+      - name: italy
+        image: italy:1.0
+        ports:
+        - containerPort: 80 #which port is exposed OUTSIDE the container
+        resources: {}

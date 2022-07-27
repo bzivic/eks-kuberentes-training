@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spain
+  namespace: workshop
+spec:
+  type: ClusterIP
+  selector:
+    app: spain #does this need to be modified?
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

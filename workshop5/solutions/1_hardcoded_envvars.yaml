@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynodejsapp
+  labels:
+    app: mynodejsapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynodejsapp
+  template:
+    metadata:
+      labels:
+        app: mynodejsapp
+    spec:
+      containers:
+      - name: mynodejsapp
+        image: mynodejsapp:1.0
+        ports:
+        - containerPort: 8080 #which port is exposed OUTSIDE the container

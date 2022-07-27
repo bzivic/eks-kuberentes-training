@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  minReadySeconds: 10 #New pods are considered ready/available only if they are ready for atleast 10s. Demo purposes only
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.1
+        ports:
+        - containerPort: 80 #which port is exposed OUTSIDE the container
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 50m
+          requests:
+            memory: 100Mi
+            cpu: 25m

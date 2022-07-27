@@ -1,0 +1,6 @@
+cronjob:
+    schedule: "*/5 * * * *"
+    annotations: {}
+    concurrencyPolicy: "Forbid"
+    failedJobsHistoryLimit: "1"
+    successfulJobsHistoryLimit: "1"

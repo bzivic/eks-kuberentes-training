@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynodejsapp
+  labels:
+    app: mynodejsapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynodejsapp
+  template:
+    metadata:
+      labels:
+        app: mynodejsapp
+    spec:
+      containers:
+      - name: mynodejsapp
+        image: mynodejsapp:4.0
+        ports:
+        - containerPort: 8080 #which port is exposed OUTSIDE the container
+        env:
+          - name: SITE_COLOR
+            valueFrom:
+              configMapKeyRef:
+                # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+                name: myapp-cm1
+                # Specify the key associated with the value
+                key: color

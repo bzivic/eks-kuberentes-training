@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: combined
+spec:
+  rules:
+  - host: mygolangapp.cloud #Add host header here
+    http:
+      paths:
+      - path: /web_spain
+        backend:
+          serviceName: spain
+          servicePort: 8080
+      - path: /web_italy
+        backend:
+          serviceName: italy
+          servicePort: 8080

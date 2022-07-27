@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: probe
+  labels:
+    app: probe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: probe
+  template:
+    metadata:
+      labels:
+        app: probe
+    spec:
+      containers:
+      - name: liveness
+        image: k8s.gcr.io/liveness
+        args:
+        - /server
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+            - name: Custom-Header
+              value: Awesome
+          initialDelaySeconds: 5 #Number of seconds after the container has started before probes are initiated
+          periodSeconds: 5 #How often (in seconds) to perform the probe
+          timeoutSeconds: 1 #Number of seconds after which the probe times out
+          successThreshold: 1 #Minimum consecutive successes for the probe to be considered successful after having failed
+          failureThreshold: 3 #When a probe fails, Kubernetes will try failureThreshold times before giving up
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5 #Number of seconds after the container has started before probes are initiated
+          periodSeconds: 5 #How often (in seconds) to perform the probe
+          timeoutSeconds: 1 #Number of seconds after which the probe times out
+          successThreshold: 1 #Minimum consecutive successes for the probe to be considered successful after having failed
+          failureThreshold: 3 #When a probe fails, Kubernetes will try failureThreshold times before giving up

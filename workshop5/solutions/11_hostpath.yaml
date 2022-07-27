@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostpathvolume
+  labels:
+    app: hostpathvolume
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostpathvolumepod
+  template:
+    metadata:
+      labels:
+        app: hostpathvolumepod
+    spec:
+      containers:
+      - image: busybox
+        name: busybox
+        command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]
+        volumeMounts:
+        - mountPath: /tmp/log
+          name: my-volume
+      volumes:
+      - name: my-volume
+        hostPath:
+          path: /var/log
+          type: Directory

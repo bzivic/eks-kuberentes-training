@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spain
+  namespace: default
+  labels:
+    app: spain
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spain
+  template:
+    metadata:
+      labels:
+        app: spain
+    spec:
+      containers:
+      - name: spain
+        image: spain:1.0
+        ports:
+        - containerPort: 8080 #which port is exposed OUTSIDE the container
+        resources: {}
