@@ -31,10 +31,3 @@ kubectl run -i --rm --tty debug --image=alpine --restart=Never -- sh
 ```
 
 [Official kubectl CLI cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
-
-### Minikube
-
-```bash
-# Configure your environment to use minikube's docker daemon
-eval $(minikube docker-env)
-```
