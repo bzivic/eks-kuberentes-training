@@ -91,6 +91,7 @@
 ### 4. New application
 
 1. Create a values.yaml file inside the new folder, without modifying what's in the webapp/ folder
-1. Set a variable to run your custom application from workshop6 (italy:1.0)
-1. Create a dry-run of the application to confirm appropriate resources will be created with a new helm release
-1. Install the application with a new helm release
+1. Set variables in your `values.yaml` to run your custom application from workshop6 (e.g., `italy:1.0`). You'll likely need to override `image.repository` and `image.tag`.
+   *   **Minikube Note:** Ensure the `italy:1.0` image was built within Minikube's Docker environment (using `eval $(minikube -p minikube docker-env)` as noted in Workshop 6). Also, ensure the Helm chart's `imagePullPolicy` (check `webapp/values.yaml` or set it in your override file) is set to `IfNotPresent` or `Never` so Kubernetes uses the local image.
+1. Create a dry-run of the application to confirm appropriate resources will be created with a new helm release (`helm install --dry-run ... -f values.yaml ./webapp`)
+1. Install the application with a new helm release (`helm install ... -f values.yaml ./webapp`)

@@ -7,6 +7,8 @@
 1. Take a the look at hello-world application, this time in NodeJS (using Express)
 
     ```bash
+    # Minikube Note: Before building, ensure your terminal is using Minikube's Docker daemon.
+    # Run `eval $(minikube -p minikube docker-env)` first (see Workshop 0).
     docker build -t mynodejsapp:1.0 .
     ```
 
@@ -37,6 +39,7 @@
 1. Build the container again, and increment the version number!
 
     ```bash
+    # Minikube Note: Remember `eval $(minikube -p minikube docker-env)` before building.
     docker build -t mynodejsapp:2.0 .
     ```
 
@@ -61,7 +64,7 @@
     COPY /config/config.json /config/
     ```
 
-1. Build the container after incrementing the version and update your kubernetes deployment
+1. Build the container after incrementing the version (`eval $(minikube ...)` first if using Minikube) and update your kubernetes deployment
 1. Confirm the output of the application
 
 ## ConfigMaps
@@ -198,6 +201,7 @@
 
 1. Mount this in your container under /tmp/log and apply your manifest
 1. Open a shell into your container and see the contents of your volume mount
+   *   **Note:** `hostPath` mounts a directory from the *Minikube node's* filesystem (the VM or container running Kubernetes), not directly from your host machine (e.g., macOS). The exact location might vary depending on the Minikube driver.
 
 ### 12. Static Provisioning
 
@@ -234,6 +238,7 @@
 1. Recreate the deployment
 1. Shell into the container and confirm your file is still there
 1. Exit and delete the resources created
+   *   **Note:** Dynamic provisioning requires a StorageClass. Minikube usually provides a default StorageClass named `standard` which handles the PV creation automatically when a PVC requests it. You can check available StorageClasses with `kubectl get storageclass`.
 
 ## Free Exercises
 

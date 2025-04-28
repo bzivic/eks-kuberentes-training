@@ -75,8 +75,10 @@
 1. Build both the containers, taking care with labels
 
     ```bash
+    # Minikube Note: Remember `eval $(minikube -p minikube docker-env)` before building each image.
     cd italy_go && docker build -t italy:1.0 .
-    cd spain_go && docker build -t spain:1.0 .
+    cd ../spain_go && docker build -t spain:1.0 .
+    cd .. 
     ```
 
 1. Run docker image ls to see enjoy some functionally basic but tiny containers
@@ -142,12 +144,14 @@
 
 1. Instead of constantly port-forwarding, let's expose our service as a NodePort service. Change the service type for one of your services to `NodePort`, and add a `nodePort: 30000` under your ports spec
 1. Apply the manifest and look at the outputs for `get service` and `describe service` again
-1. Hit the URL that's mapped all the way to your service
+1. Hit the URL that's mapped all the way to your service.
+   *   **Minikube Note:** To access the NodePort service from your host machine, use the Minikube IP and the specified port (e.g., 30000). Get the IP with `minikube ip`. The URL will be like `http://$(minikube ip):30000`.
 
 ### 13. LoadBalancer service
 
 1. Modify an existing service to be of type `LoadBalancer` instead and reapply the manifest
-1. Take a look at the service configuration. External-IP will be pending until you start a tunnel
+1. Take a look at the service configuration. External-IP will be pending until you start a tunnel.
+   *   **Minikube Note:** As mentioned in Workshop 0, Minikube requires `minikube tunnel` or `minikube service <service-name>` to expose `LoadBalancer` services. Run one of these in a separate terminal.
 1. Check external-ip field in a different terminal while the tunnel is up
 
 ### 14. ExternalName service

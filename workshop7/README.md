@@ -2,14 +2,21 @@
 
 ## Ingress
 
+**Minikube Note:** Ingress resources require an Ingress controller to function. Before starting this workshop, ensure the Minikube Ingress addon is enabled:
+```bash
+minikube addons enable ingress
+```
+Refer back to Workshop 0 for more details if needed.
+
 ### 1. Simple deployment
 
 1. Let's deploy our kuard pod again [1_deployment.yaml](1_deployment.yaml)
 1. Apply the service manifest for this deployment too [1_service.yaml](1_service.yaml)
 1. Investigate the manifest [1_ingress.yaml](1_ingress.yaml), add a host header value and apply it
 1. Run `describe` and `get` on your ingress
-1. Ensure you can resolve the host header on your localhost (add entry to /etc/hosts)
-1. Check out the ingress controller and it's logs
+1. Ensure you can resolve the host header on your localhost (add entry to /etc/hosts).
+   *   **Minikube Note:** The IP address to use in your `/etc/hosts` file should be the Minikube IP. Get it by running `minikube ip`. Your entry will look like: `$(minikube ip) your-host-header.com` (replace `your-host-header.com` with the actual host you set in the Ingress). You might need administrator privileges (`sudo`) to edit this file.
+1. Check out the ingress controller and it's logs (usually in the `kube-system` or `ingress-nginx` namespace, depending on the addon version).
 
 ### 2. Multiple paths/hosts
 

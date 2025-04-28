@@ -81,9 +81,12 @@
 
     ```bash
     cd hello-world
+    # Minikube Note: Before building, ensure your terminal is using Minikube's Docker daemon.
+    # Run `eval $(minikube -p minikube docker-env)` first (see Workshop 0).
     docker build -t $insert_your_name_here:1.0 .
     docker images
-    # Make sure your imagePullPolicy: Never
+    # Make sure your imagePullPolicy is set appropriately (e.g., Never or IfNotPresent)
+    # so Kubernetes uses the image you just built inside Minikube's environment.
     ```
 
 1. Create a manifest from scratch using your favorite editor
@@ -95,7 +98,8 @@
 ### 5. Versioned containers
 
 1. Let's do this exercise in a scalable way, using versions
-1. Create a new container and instead of overriding the version, increment it instead
+1. Create a new container and instead of overriding the version, increment it instead.
+   *   **Minikube Note:** Remember to use `eval $(minikube -p minikube docker-env)` before running `docker build` if using Minikube.
 1. Update the manifest to point to the new version, and apply
 1. Describe the Pod to see which version it's using
 1. Get the Pod output in yaml to be sure
